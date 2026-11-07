@@ -129,10 +129,13 @@ tick clock, chunks, light, the block registry, the crosshair hit tests), another
 No `native_tick` hook: SmartF3 is client-only, keeps no per-tick state, and checks Options > Mods' switch where it
 acts (it only ever acts in the window's game, `native_window`).
 
-Pinned: Horizon `142388e1c136e622652ec7505af15d8ad195e041`, horizon-mixins `0d6b103c70633d8fd9443d8d0acd3aadaacedb06`,
-game 26.3, the same pins as TreeFall 0.3.0 and Mason 0.2.0, so the three build together into one game. Checked with
-horizon-mixins `plan` and `apply` on that commit, alone and together with TreeFall and Mason (21 injections, 14
-modules, no conflict; neither of them hooks `Game::hud`).
+Pinned: Horizon `6475f62f3c834b7489e1816bf47f47ea5eb2b879`, horizon-mixins `ddd9700b21997c95d95ac6ee5ecafe3830cf622a`,
+game 26.3. Checked with horizon-mixins `apply` on that commit.
+
+As of 0.1.1 (Horizon `6475f62...`): LAN guests are no longer pickable client-side — the client-side
+guest crosshair pick (`guest_hit`) was removed from the game, and guests are not pickable entities there.
+The entity-under-crosshair line therefore no longer names LAN guests as `minecraft:player`. Everything
+else is unchanged. (On `142388e...`, 0.1.0, it did.)
 
 ## Build and try
 
@@ -162,7 +165,7 @@ it with TreeFall and Mason, put the three bundles in one folder, one subfolder e
 cargo test
 cargo fmt --check
 cargo clippy --all-targets -- -D warnings
-python tools/pack_hnmod.py   # dist/smartf3-0.1.0.hnmod
+python tools/pack_hnmod.py   # dist/smartf3-0.1.1.hnmod
 ```
 
 Written with [Claude Code](https://claude.com/claude-code).

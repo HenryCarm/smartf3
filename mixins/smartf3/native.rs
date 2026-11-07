@@ -1,4 +1,4 @@
-// SmartF3's adapter to the game (Horizon 142388e1c136e622652ec7505af15d8ad195e041,
+// SmartF3's adapter to the game (Horizon 6475f62f3c834b7489e1816bf47f47ea5eb2b879,
 // see horizon-mixin.toml). Injected as `crate::game::smartf3_native`: reads
 // what the debug screen shows from the game into a `Snapshot`, lets the
 // game-independent `crate::game::smartf3` (runtime.rs) arrange it, and draws
@@ -537,9 +537,9 @@ impl Game<'_> {
         if let Some((_, d)) = self.dragon_hit() {
             offer(d, "minecraft:ender_dragon".to_owned());
         }
-        if let Some((_, d)) = self.guest_hit() {
-            offer(d, "minecraft:player".to_owned());
-        }
+        // Horizon 6475f62 removed the client-side guest crosshair pick
+        // (`guest_hit`); LAN guests are not pickable entities there, so the
+        // entity-under-crosshair line simply does not name them.
         let (distance, kind) = best?;
         self.before_block(distance).then_some(kind)
     }
